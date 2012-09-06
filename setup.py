@@ -19,6 +19,8 @@ setup(name='aicq',
       zip_safe=False,
       install_requires=[
           # -*- Extra requirements: -*-
+          "quantum",
+          "aiclib"
       ],
       entry_points="""
       # -*- Entry points: -*-
