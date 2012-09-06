@@ -1,0 +1,70 @@
+< nvplib.py > <-- do dis first
+- check default transport zone
+- check tenant
+    > Network functions
+- get network (switch)
+- create lswitch 
+- update network (switch)
+- get all networks (switches for tenant)
+    uses tag=<tenantid>&tag_scope=os_tid
+- query networks (switch)
+    takes tenant_id but does not pass it as it has
+    a tags (list) argument that might include it
+- delete network (switch)
+- delete networks (switch)
+- create network (object)
+    creates a dictionary description of an lswitch
+    with the tenant id, internal use probably
+    > Port functions
+- get port stats
+    network id is switch id; attempts to find the
+    switch first then attempts to get the stats on
+    the port
+- check port state
+    internal function to check if a port state is of
+    VVL
+- query ports (lport of switch)
+    allows filtering by relations and attachment uuid
+- delete port
+    does not look for the network first
+- delete all ports (lports of switch)
+    does no error checking, could and should use the
+    previous function, delete port
+- get port (lport of switch)
+    supports relations
+- plug interface (vif and port)
+- unplug interface (vif and port)
+- update port
+    performs a little bit of logic based on state
+- create port (port on lswitch)
+    sets admin_status_enabled based on the initial
+    state of the port [UP|DOWN], should use a 
+    constant instead of magic string
+- get port status (port on lswitch)
+    checks the status and returns the magic strings
+    that everything else uses [UP|DOWN]
+</ nvplib.py >
+
+< QuantumPlugin.py >
+- uses config file nvp.ini
+- and messes with some paths
+- init config (probably just copy)
+    will try to load the configuration file from all
+    the silly paths it made earlier; will raise if
+    there isn't a config file
+- find config (probably just copy)
+    will try to look for the config file from all
+    the silly paths
+- parse config (probably just copy)
+    parses a config file
+    > NVPCluster class (omg a class)
+- add controller
+    does what it says
+- bunches of properties
+    these only return the first controller's info, so
+    I don't know what good this is as a multi-
+    controller system
+    > NvpPlugin class
+- essentially a wrapper over nvplib.py
+- all functionality adds a little bit of logic though
+</ QuantumPlugin.py >
